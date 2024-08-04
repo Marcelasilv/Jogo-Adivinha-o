@@ -1,0 +1,160 @@
+package Jogo;
+
+public abstract class Game {
+    String nome;
+    String descricao;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public abstract void inicioJogo();
+    public abstract void executaJogo();
+}
+
+
+CLASS ADVNUMERO[code]
+
+package Jogo;
+
+import java.util.*;
+public class AdvNumero extends Game {
+
+Scanner entrada = new Scanner(System.in);
+ String cond = "";
+private int num;
+private int tentativa;
+private int numTentativa;
+private int i;
+
+public int getNum() {
+    return num;
+}
+
+public void setNum(int num) {
+    this.num = num;
+}
+
+public int getTentativa() {
+    return tentativa;
+}
+
+public void setTentativa(int tentativa) {
+    this.tentativa = tentativa;
+}
+
+public int getNumTentativa() {
+    return numTentativa;
+}
+
+public void setNumTentativa(int numTentativa) {
+    this.numTentativa = numTentativa;
+}
+
+public int getI() {
+    return i;
+}
+
+public void setI(int i) {
+    this.i = i;
+}
+
+public void inicioJogo(){
+    System.out.println("        Início do jogo\n \n "
+            + "Fácil (0 - 15) \n"
+            + "Médio (0 - 30) \n"
+            + "Díficil (0 - 50) \n");
+
+    System.out.println("\n \n Escolha uma opção");
+    i = entrada.nextInt();
+
+    do{
+        switch (i) {
+            case 1: num = (int)(1 + Math.random()*15);
+                    System.out.println("Opção escolhida 'fácil'");
+                    break;
+            case 2: num = (int)(1 + Math.random()*30);
+                    System.out.println("Opção escolhida Média");
+                    break;
+            case 3: num = (int)(1 + Math.random()*50);
+                    System.out.println("Opção esclhida Difícil");
+                    break;
+            default:
+                    System.out.println("\n Opção Inválida \n"
+                            + "Por favor Escolha uma Opção válida!!");
+                    i = entrada.nextInt();
+        }
+    } while(i > 3);
+            executaJogo();
+}
+
+    public void executaJogo(){
+       
+        tentativa = 5;
+        numTentativa = 0;
+        do{
+            System.out.println("\n Você ainda tem " + tentativa + " tentativas");
+            System.out.println("Por fovor tente um número");
+            numTentativa = entrada.nextInt();           
+
+            if (numTentativa == num){
+                    System.out.println("Parabens!! Você Ganhou \n \n");
+                    break;
+                }else if (numTentativa > num){
+                    System.out.println("Número muito alto");
+                } else {
+                    System.out.println("Número muito baixo");
+                }
+            
+            tentativa--;
+            if (tentativa == 0) {
+                System.out.println("Você perdeukkkkkk");
+            }
+        } while(tentativa > 0);
+
+        System.out.println("Deseja continuar: \n "
+                             + "Escolha S para sim e N para sair");
+        do{
+             cond = entrada.nextLine();
+             if (cond.equals("s")){
+                inicioJogo();
+                break;} else if (cond.equals("n")){
+                    System.out.println("fim de jogo");
+                    System.exit(0);
+                } else {
+                            System.out.println("Opção invalida \n ");
+                        }
+
+        }while(true);
+
+    }
+}
+
+[/code]
+
+CLASS TESTE[code]
+
+package Jogo;
+
+public class Teste {
+
+public static void main(String[] args) {
+
+    AdvNumero jogo1 = new AdvNumero();
+    
+    jogo1.inicioJogo();
+
+}
+}
